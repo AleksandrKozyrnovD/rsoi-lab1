@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: swanpoi/person-service:latest
+          tags: tsardrobovik/person-service:latest
           context: .
 
       - name: Run API Tests
