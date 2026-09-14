@@ -13,6 +13,17 @@ services:
       - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
-
+    networks:
+      - personnetwork
+  person-server:
+    build: ./
+    container_name: person-server
+    ports:
+      - "8080:8080"
+    networks:
+      - personnetwork
 volumes:
   db-data:
+
+networks:
+  personnetwork:
