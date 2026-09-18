@@ -24,6 +24,7 @@ services:
       - personnetwork
     depends_on:
       - postgres
+    restart: on-failure
 volumes:
   db-data:
 
