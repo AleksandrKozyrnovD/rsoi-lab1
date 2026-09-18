@@ -5,8 +5,8 @@ http:
 database:
   driver: "postgres"
   postgres:
-    host: "postgres"
+    host: "dpg-damn9u3m8hqs739ch2lg-a"
     port: 5432
-    user: "program"
-    password: "test"
-    database: "persons"
+    user: "postgre_wvqg_user"
+    password: "xCAJ0Eu2HaDn77VHabwNEEFEKWVe0WRi"
+    database: "postgre_wvqg"
