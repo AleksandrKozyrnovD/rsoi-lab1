@@ -126,6 +126,30 @@ func (a *V1) HandlePersonsPatchId(c *gin.Context) {
 		return
 	}
 
+	existing, err := a.personService.GetByID(id)
+	if err != nil {
+		if errors.Is(err, service.ErrNotFound) {
+			c.JSON(http.StatusNotFound, models.ErrorResponse{Message: "Not found Person for ID"})
+			return
+		}
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Message: err.Error()})
+		return
+	}
+
+	// PATCH: не затираем поля, которые не пришли в запросе
+	if req.Name == "" {
+		req.Name = existing.Name
+	}
+	if req.Age == 0 {
+		req.Age = existing.Age
+	}
+	if req.Address == "" {
+		req.Address = existing.Address
+	}
+	if req.Work == "" {
+		req.Work = existing.Work
+	}
+
 	updated, err := a.personService.Update(id, req)
 	if err != nil {
 		if errors.Is(err, service.ErrNotFound) {
@@ -138,6 +162,7 @@ func (a *V1) HandlePersonsPatchId(c *gin.Context) {
 		})
 		return
 	}
+
 	c.JSON(http.StatusOK, toPersonResponse(updated))
 }
 
